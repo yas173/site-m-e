@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dia das Mães</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f5;
+      color: #333;
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      background: linear-gradient(to right, #d63384, #f78da7);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    section {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      color: #d63384;
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .message {
+      font-size: 1.2em;
+      text-align: justify;
+    }
+
+    .gallery, .videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .gallery img, .videos video {
+      width: 300px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fce4ec;
+      color: #444;
+      font-size: 1em;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      background: #d63384;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    .buttons button:hover {
+      background: #a02662;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      .gallery img, .videos video {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎵 Música de fundo -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="hino.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <header>
+    <h1>Feliz Dia das Mães!</h1>
+    <p>Um site feito com todo meu carinho 🤍</p>
+  </header>
+
+  <div class="container">
+
+    <section>
+      <h2>🌸 Mensagem Especial 🌸</h2>
+      <p class="message">
+        Mainha, neste tão especial, o Dia das Mães, quero agradecer por tudo que você representa para mim e por tudo que você tem feito para minha pessoa. Você é minha base, a mulher que me inspira a ser cada dia melhor e meu amor incondicional. Cada sorriso seu ilumina meus dias. Obrigado por estar sempre comigo. Eu te amo mais do que chocolate! 💕
+      </p>
+    </section>
+
+    <section>
+      <h2>📸 Nossas Melhores Memórias</h2>
+      <div class="gallery">
+        <img src="foto1.jpg" alt="Mamãe sorrindo">
+        <img src="foto2.jpg" alt="Nós dois juntos">
+        <img src="foto3.jpg" alt="Um momento especial">
+      </div>
+    </section>
+
+    <section>
+      <h2>🎥 Vídeos com Amor</h2>
+      <div class="videos">
+        <video controls>
+          <source src="video1.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+        <video controls>
+          <source src="video2.mp4" type="video/mp4">
+          Seu navegador não suporta vídeo.
+        </video>
+      </div>
+    </section>
+
+    <section id="carta">
+      <h2>💌 Carta para Você</h2>
+      <p class="message" id="cartaTexto">
+        Querida mamãe,<br><br>
+        Desde que me entendo por gente, você esteve ao meu lado. Com carinho, paciência e força, você me ensinou a ser quem sou. Seu abraço é meu refúgio, seu sorriso é meu porto seguro. Que neste dia você se sinta amada como merece. E saiba: estarei sempre aqui por você, como você sempre esteve por mim.<br><br>
+        Com todo o meu amor,<br>
+        Yasmim Jhenefer juntamente com Thaylla e Enzo
+      </p>
+      <div class="buttons">
+        <button onclick="baixarCarta()">📄 Baixar Carta em PDF</button>
+        <button onclick="toggleMusica()">🎵 Pausar/Tocar Música</button>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2025 | Feito com amor para a melhor mãe do mundo 💖
+  </footer>
+
+  <!-- 📄 Script para baixar PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    function baixarCarta() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const texto = document.getElementById("cartaTexto").innerText;
+      doc.text(texto, 10, 20);
+      doc.save("Carta_para_Mamãe.pdf");
+    }
+
+    function toggleMusica() {
+      const musica = document.getElementById("bgMusic");
+      if (musica.paused) {
+        musica.play();
+      } else {
+        musica.pause();
+      }
+    }
+  </script>
+
+</body>
+</html>
